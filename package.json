@@ -1,0 +1,19 @@
+{
+  "name": "sql_parser",
+  "version": "0.0.1",
+  "description": "SQL parser",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm i -g karma-cli",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vadym Makhonin",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2"
+  }
+}
