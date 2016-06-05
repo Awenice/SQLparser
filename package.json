@@ -9,6 +9,10 @@
   },
   "author": "Vadym Makhonin",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/Awenice/SQLparser"
+  },
   "devDependencies": {
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
