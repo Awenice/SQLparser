@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'commonjs'],
 
 
     // list of files / patterns to load in the browser
@@ -29,7 +29,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js': ['coverage']
+      'src/**/*.js': ['coverage', 'commonjs'],
+      'test/**/*Spec.js': ['commonjs']
     },
 
 
@@ -72,6 +73,10 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    commonjsPreprocessor: {
+      modulesRoot: './src'
+    }
   })
 };

@@ -11,12 +11,13 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url":  "https://github.com/Awenice/SQLparser"
+    "url": "https://github.com/Awenice/SQLparser"
   },
   "devDependencies": {
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-commonjs": "^1.0.0",
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2"
   }

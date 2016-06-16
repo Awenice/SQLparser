@@ -6,6 +6,14 @@ class Pattern {
   }
 }
 
+Pattern.prototype.then = function (transform) {
+  var self = this;
+  return new Pattern(function (str, pos) {
+    var r = self.exec(str, pos);
+    return r && { res: transform(r.res), end: r.end };
+  });
+};
+
 Pattern.txt = function (text) {
   return new Pattern((str, pos = 0) => {
     if (str.substr(pos, text.length) === text) {
@@ -37,7 +45,8 @@ Pattern.opt = function (pattern) {
 
 Pattern.exc = function (pattern, except) {
   return new Pattern((str, pos = 0) => {
-    return !except.exec(str, pos) && pattern.exec(str, pos);
+    var result = !except.exec(str, pos) && pattern.exec(str, pos);
+    return result ? result : undefined;
   });
 };
 
@@ -70,3 +79,21 @@ Pattern.seq = function (...patterns) {
   });
 };
 
+Pattern.rep = function (pattern, separator) {
+  var separated = !separator ? pattern :
+      Pattern.seq(separator, pattern).then(r => r[1]);
+
+  return new Pattern(function (str, pos) {
+    var res = [], end = pos, r = pattern.exec(str, end);
+
+    while (r && r.end > end) {
+      res.push(r.res);
+      end = r.end;
+      r = separated.exec(str, end);
+    }
+
+    return { res: res, end: end };
+  });
+};
+
+module.exports = Pattern;
