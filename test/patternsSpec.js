@@ -14,7 +14,13 @@ describe('patterns', () => {
   });
 
   it('Pattern.then', () => {
+    var pattern = new Pattern(function () {
+      return { res: [1, 2], end: 0 };
+    });
+    var newPattern = pattern.then(r => r[0]);
 
+    expect(newPattern.constructor).toEqual(Pattern);
+    expect(newPattern.exec()).toEqual({ res: 1, end: 0 });
   });
 
   it('txt pattern', () => {
@@ -60,6 +66,10 @@ describe('patterns', () => {
   });
 
   it('rep pattern', () => {
-    var pattern = Pattern.rep();
+    var pattern = Pattern.rep(Pattern.txt('test'), Pattern.txt(', '));
+    expect(pattern.exec('test, test, test')).toEqual({ res: ['test', 'test', 'test'], end: 16 });
+    expect(pattern.exec(',test, test, test')).toBeUndefined();
+    pattern = Pattern.rep(Pattern.txt('test'));
+    expect(pattern.exec('abctesttest', 3)).toEqual({ res: ['test', 'test'], end: 11 });
   });
 });
